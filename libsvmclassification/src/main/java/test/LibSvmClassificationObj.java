@@ -55,7 +55,7 @@ public class LibSvmClassificationObj{
 		{			
 			svm_node nodeX[]=text2Node(pos,idx);
 			vx_train.addElement(nodeX);				
-			vy_train.addElement((double)0);						
+			vy_train.addElement((double)-1);						
 		}
 		for(String neg:negtexts)
 		{			
@@ -76,8 +76,9 @@ public class LibSvmClassificationObj{
 		svm.svm_save_model("textmod.mdl", model);
 		
 		String[][] texts=new String[][]{postexts,negtexts,nutraltexts};
-		
+		int i=0;
 		for(String[] list:texts)
+		{System.out.println("texts "+i++);
 		for(String neg:list)
 		{			
 			svm_node nodeX[]=text2Node(neg,idx);
@@ -93,7 +94,8 @@ public class LibSvmClassificationObj{
 			
 			double v = svm.svm_predict(model,nodeX);
 			
-			System.out.println(v);	
+			System.out.println("'"+neg+"'="+v);	
+		}
 		}
 	
 	}
